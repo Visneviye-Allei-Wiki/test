@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="images/icon.png" type="image/png" sizes="512x512">
     <title>Вишневые Аллеи Вики</title>
     <style>
         body {
@@ -27,9 +26,14 @@
             margin-bottom: 20px;
         }
         .header img {
-            max-width: 100%;
+            max-width: 50%; /* Уменьшение размера логотипа */
             height: auto;
             border-radius: 10px;
+            cursor: pointer; /* Добавление указателя курсора для кликабельности */
+            transition: transform 0.3s ease; /* Анимация при наведении */
+        }
+        .header img:hover {
+            transform: scale(1.05); /* Небольшое увеличение при наведении */
         }
         .header h1 {
             color: #d147a3;
@@ -83,7 +87,9 @@
 <body>
     <div class="container">
         <header class="header">
-            <img src="images/bannerwiki.png" alt="Вишневые Аллеи Вики">
+            <a href="https://visneviye-allei-wiki.github.io/wiki/"> <!-- Сделать логотип кликабельным -->
+                <img src="images/bannerwiki.png" alt="Вишневые Аллеи Вики">
+            </a>
             <h1>Добро пожаловать на Вишневые Аллеи Вики!</h1>
         </header>
 
