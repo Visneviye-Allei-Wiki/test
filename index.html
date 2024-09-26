@@ -23,12 +23,12 @@
             color: #e0e0e0;
         }
         .sidebar {
-            width: 60px;
+            width: 10px;
             height: 100vh;
             position: fixed;
             top: 0;
             left: 0;
-            padding: 20px;
+            padding: 20px 0;
             box-sizing: border-box;
             transition: all 0.3s ease;
             overflow: hidden;
@@ -36,6 +36,7 @@
         }
         .sidebar:hover {
             width: 250px;
+            padding: 20px;
         }
         .light-theme .sidebar {
             background-color: #ffb6c1;
@@ -46,14 +47,14 @@
             border-right: 1px solid #ff9cc2;
         }
         .main-content {
-            margin-left: 100px;
+            margin-left: 10px;
             padding: 20px;
             box-sizing: border-box;
-            width: calc(100% - 100px);
+            width: calc(100% - 10px);
             transition: margin-left 0.3s ease;
         }
         .sidebar:hover + .main-content {
-            margin-left: 290px;
+            margin-left: 250px;
         }
         .container {
             max-width: 1200px;
@@ -100,6 +101,11 @@
         .navigation {
             margin-bottom: 20px;
             white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .sidebar:hover .navigation {
+            opacity: 1;
         }
         .navigation a {
             display: block;
@@ -155,6 +161,11 @@
             align-items: center;
             margin-top: 20px;
             white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .sidebar:hover .theme-switch {
+            opacity: 1;
         }
         .switch {
             position: relative;
