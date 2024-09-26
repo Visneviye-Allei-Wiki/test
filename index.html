@@ -8,19 +8,33 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
             margin: 0;
             padding: 0;
             font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.light-theme {
+            background-color: #ffc0cb;
+            color: #333;
+        }
+        body.dark-theme {
+            background-color: #121212;
+            color: #e0e0e0;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            border-radius: 10px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .light-theme .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .dark-theme .container {
             background-color: rgba(30, 30, 30, 0.9);
             box-shadow: 0 0 10px rgba(255,255,255,0.1);
-            border-radius: 10px;
         }
         .header {
             text-align: center;
@@ -37,42 +51,94 @@
             transform: scale(1.05);
         }
         .header h1 {
-            color: #ff9cc2;
             margin-top: 10px;
+            transition: color 0.3s;
+        }
+        .light-theme .header h1 {
+            color: #d147a3;
+        }
+        .dark-theme .header h1 {
+            color: #ff9cc2;
         }
         .content {
             margin-bottom: 20px;
         }
         .navigation {
-            background-color: #2a2a2a;
             padding: 10px;
             border-radius: 10px;
             margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+        .light-theme .navigation {
+            background-color: #ffb6c1;
+        }
+        .dark-theme .navigation {
+            background-color: #2a2a2a;
         }
         .navigation a {
             display: inline-block;
             margin: 5px;
             padding: 5px 10px;
-            background-color: #3a3a3a;
-            color: #ff9cc2;
             text-decoration: none;
             border-radius: 5px;
             transition: all 0.3s ease;
         }
-        .navigation a:hover {
+        .light-theme .navigation a {
+            background-color: #fff;
+            color: #d147a3;
+        }
+        .dark-theme .navigation a {
+            background-color: #3a3a3a;
+            color: #ff9cc2;
+        }
+        .light-theme .navigation a:hover {
+            background-color: #d147a3;
+            color: #fff;
+        }
+        .dark-theme .navigation a:hover {
             background-color: #ff9cc2;
             color: #121212;
         }
         h2 {
+            transition: color 0.3s;
+        }
+        .light-theme h2 {
+            color: #d147a3;
+        }
+        .dark-theme h2 {
             color: #ff9cc2;
         }
         a {
-            color: #ff9cc2;
             text-decoration: none;
             transition: color 0.3s ease;
         }
-        a:hover {
+        .light-theme a {
+            color: #d147a3;
+        }
+        .dark-theme a {
+            color: #ff9cc2;
+        }
+        .light-theme a:hover {
+            color: #ff69b4;
+        }
+        .dark-theme a:hover {
             color: #ffc0cb;
+        }
+        .theme-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            background-color: #d147a3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .dark-theme .theme-switch {
+            background-color: #ff9cc2;
+            color: #121212;
         }
         @media (max-width: 768px) {
             .container {
@@ -85,7 +151,8 @@
         }
     </style>
 </head>
-<body>
+<body class="light-theme">
+    <button class="theme-switch" onclick="toggleTheme()">Сменить тему</button>
     <div class="container">
         <header class="header">
             <a href="https://visneviye-allei-wiki.github.io/wiki/">
@@ -108,5 +175,29 @@
             <p>Вишнёвые аллеи - <a href="https://discord.gg/xqTMDz7CXK">дискорд-сервер</a>, который был создан для общения и поддержки автора <a href="https://visneviye-allei-wiki.github.io/Cherru/">Cherru</a> (художник/аниматор). Основная тематика сервера - майнкрафт ютубер MrLololoshka и сама художница. Сервер был создан 24 июля 2022 года, но был открыт 1-го августа 2022-го года. Помощь с созданием сервера художнице (Cherru) предложил Дункан (duncan_reivun), который и заложил первый и значимый фундамент для всего сервера.</p>
         </main>
     </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            if (body.classList.contains('light-theme')) {
+                body.classList.remove('light-theme');
+                body.classList.add('dark-theme');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Проверяем сохраненную тему при загрузке страницы
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.remove('light-theme');
+                document.body.classList.add('dark-theme');
+            }
+        });
+    </script>
 </body>
 </html>
