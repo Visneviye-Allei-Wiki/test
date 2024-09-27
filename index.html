@@ -209,14 +209,29 @@
         .theme-switch span {
             margin-left: 10px;
         }
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1001;
+            background-color: #ffb6c1;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .dark-theme .mobile-menu-toggle {
+            background-color: #2a2a2a;
+        }
         @media (max-width: 768px) {
             .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
+                width: 0;
+                padding: 0;
             }
-            .sidebar:hover {
-                width: 100%;
+            .sidebar.active {
+                width: 250px;
+                padding: 20px;
             }
             .main-content {
                 margin-left: 0;
@@ -225,11 +240,21 @@
             .sidebar:hover + .main-content {
                 margin-left: 0;
             }
+            .mobile-menu-toggle {
+                display: block;
+            }
+            .navigation, .theme-switch {
+                opacity: 1;
+            }
+            .header img {
+                max-width: 50%;
+            }
         }
     </style>
 </head>
 <body class="light-theme">
-    <div class="sidebar">
+    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+    <div class="sidebar" id="sidebar">
         <nav class="navigation">
             <a href="https://visneviye-allei-wiki.github.io/Pages/">Все Статьи Вики</a>
             <a href="#">Категории</a>
@@ -254,7 +279,7 @@
             </header>
 
             <main class="content">
-                <p>Вишневые аллеи - <a href="https://discord.com/invite/wun8gmzdhJ">Дискорд сервер</a> комьюнити ютуб креатора <a href="https://www.youtube.com/@cherru_">Cherru (Твинкл)</a>, делает ролики по Сюжетным сезонам Лололошки</p>
+                <p>Вишневые аллеи - <a href="https://discord.com/invite/wun8gmzdhJ">Дискорд сервер</a> комьюнити ютуб креатора <a href="https://www.youtube.com/@cherru_">Cherru</a>, делавшая ролики по Сюжетным сезонам Лололошки</p>
 
                 <h2>Основная информация о сервере</h2>
                 <p>Вишнёвые аллеи - <a href="https://discord.gg/xqTMDz7CXK">дискорд-сервер</a>, который был создан для общения и поддержки автора <a href="https://visneviye-allei-wiki.github.io/Cherru/">Cherru</a> (художник/аниматор). Основная тематика сервера - майнкрафт ютубер MrLololoshka и сама художница. Сервер был создан 24 июля 2022 года, но был открыт 1-го августа 2022-го года. Помощь с созданием сервера художнице (Cherru) предложил Дункан (duncan_reivun), который и заложил первый и значимый фундамент для всего сервера.</p>
@@ -289,6 +314,11 @@
                 setTheme(true);
             }
         });
+
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
     </script>
 </body>
 </html>
